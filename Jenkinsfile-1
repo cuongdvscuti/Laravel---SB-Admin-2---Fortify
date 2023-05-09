@@ -1,15 +1,12 @@
 pipeline {
-  agent { label 'linux' }
-  options {
-    buildDiscarder(logRotator(numToKeepStr: '5'))
-  }
-  stages {
-    stage('Scan') {
-      steps {
-        withSonarQubeEnv(installationName: 'SonarQueue') {
-          sh './mvnw clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
+    agent any
+    stages {
+        stage('Run sonarqube') {
+            steps {
+                sh '''
+                    docker run --rm -e SONAR_HOST_URL="http://localhost:9001" -e SONAR_LOGIN="squ_86d915691781ed9ef0c993da6f371b20e6a5f987" -v "/home/cuongdv/Desktop/Laravel---SB-Admin-2---Fortify:/usr/src"  sonarsource/sonar-scanner-cli
+                '''
+            }
         }
-      }
     }
-  }
 }
