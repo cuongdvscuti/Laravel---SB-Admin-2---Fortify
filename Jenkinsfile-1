@@ -4,7 +4,8 @@ pipeline {
         stage('Run sonarqube') {
             steps {
                 sh '''
-                    cd /home/cuongdv/Desktop/Laravel---SB-Admin-2---Fortify &&
+                    pwd
+                    cd /home/cuongdv/Desktop/jenkins/volumes/workspace/Sonar &&
                     sonar-scanner \
                       -Dsonar.projectKey=Makita \
                       -Dsonar.sources=. \
