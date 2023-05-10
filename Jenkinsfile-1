@@ -1,15 +1,20 @@
 pipeline {
     agent any
     stages {
+        stage('Clone') {
+            steps {
+                git branch: 'sonar', url: 'https://github.com/cuongdvscuti/Laravel---SB-Admin-2---Fortify.git', credentialsId: ''
+            }
+        }
+
         stage('Run sonarqube') {
             steps {
                 sh '''
-                  docker run \
-                      --rm \
-                      -e SONAR_HOST_URL="http://localhost:9001/" \
-                      -e SONAR_SCANNER_OPTS="-Dsonar.projectKey=Makita" \
-                      -e SONAR_TOKEN="sqp_91f9016c741b527452cf393ad5c917309cb138c3" \
-                      sonarsource/sonar-scanner-cli
+                    sonar-scanner \
+                      -Dsonar.projectKey=Makita \
+                      -Dsonar.sources=. \
+                      -Dsonar.host.url=http://localhost:9001 \
+                      -Dsonar.token=sqp_91f9016c741b527452cf393ad5c917309cb138c3
                 '''
             }
         }
