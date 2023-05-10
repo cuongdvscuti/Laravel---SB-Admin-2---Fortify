@@ -4,7 +4,12 @@ pipeline {
         stage('Run sonarqube') {
             steps {
                 sh '''
-                    docker run --rm -e SONAR_HOST_URL="http://localhost:9001" -e SONAR_TOKEN="squ_86d915691781ed9ef0c993da6f371b20e6a5f987" -v "/home/cuongdv/Desktop/Laravel---SB-Admin-2---Fortify:/usr/src"  sonarsource/sonar-scanner-cli
+                    cd /home/cuongdv/Desktop/Laravel---SB-Admin-2---Fortify &&
+                    sonar-scanner \
+                      -Dsonar.projectKey=Makita \
+                      -Dsonar.sources=. \
+                      -Dsonar.host.url=http://localhost:9001 \
+                      -Dsonar.token=sqp_91f9016c741b527452cf393ad5c917309cb138c3
                 '''
             }
         }
