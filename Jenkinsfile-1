@@ -4,8 +4,6 @@ pipeline {
         stage('Run sonarqube') {
             steps {
                 sh '''
-                    pwd
-                    cd /home/cuongdv/Desktop/jenkins/volumes/workspace/Sonar &&
                     sonar-scanner \
                       -Dsonar.projectKey=Makita \
                       -Dsonar.sources=. \
